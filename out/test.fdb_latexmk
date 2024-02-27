@@ -1,0 +1,15 @@
+# Fdb version 4
+["latex"] 1708958085.25754 "c:/Users/koki0/Documents/RCJJ 2024/Documents/test.tex" "out/test.dvi" "test" 1708958085.76251 2
+  "c:/Users/koki0/Documents/RCJJ 2024/Documents/test.tex" 1708958084 187 fc93080d5f6cd26173f7a545eea2210d ""
+  "c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-dvips.def" 1703998917 35592 3e6577d32b10872f7a4c3c3075f20e3b ""
+  "c:/texlive/2023/texmf-dist/tex/platex/jsclasses/jsarticle.cls" 1703998795 61387 1c16fa09f9aa344f6b7ed4a7e2c399b2 ""
+  "c:/texlive/2023/texmf-dist/web2c/texmf.cnf" 1703996093 41009 84b61f42d16d06bedb915f57aa2374cf ""
+  "c:/texlive/2023/texmf-var/web2c/pdftex/latex.fmt" 1704002651 8217780 821ddd9de0eb7eef98d42f0483841fe7 ""
+  "c:/texlive/2023/texmf.cnf" 1704002560 713 e69b156964470283e0530f5060668171 ""
+  "out/test.aux" 1708958085 32 3985256e7290058c681f74d7a3565a19 "latex"
+  "test.tex" 1708958084 187 fc93080d5f6cd26173f7a545eea2210d ""
+  (generated)
+  "out/test.aux"
+  "out/test.dvi"
+  "out/test.log"
+  (rewritten before read)
