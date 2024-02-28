@@ -9,6 +9,7 @@
 % for hyperref
 \usepackage[dvipdfmx, bookmarkstype=toc, colorlinks=false, pdfborder={0 0 0}, bookmarks=true, bookmarksnumbered=true]{hyperref}
 \usepackage{pxjahyper}
+\usepackage{here}
 
 \title{\vspace{-1cm}テクニカルドキュメント}
 \author{\texttt{こんぶ畑}}
@@ -87,12 +88,78 @@
   上図のマップでは、ピンク線で示したように探索済みのマスを半分跨ぎながら進むという効率の悪い探索を行う可能性がある。これは機体のサイズは12$\times$12cmを基準とするのに対して、6cm単位で探索を行うことが原因である。\\
   そこで深さ優先探索における「未探索」「探索済み」という2つのパラメーターに「部分的に探索済み」を加え、進行方向の候補が複数あった場合に「部分的に探索済み」の優先度を下げることで、上図のような探索を防いでいる。\\
 
+    \subsection{壁の認識}
+    \noindent
+    LiDARによる壁の認識は6cm進むごと、つまり深さ優先探索の進路選択の一部として行う。識別する方向は機体の前後左右のマスである。\\
+    \noindent
+    まず、ロボットが毎回完璧な位置にいるとは限らない。その影響を最小限に抑えるために2種類の補正を行う。
+    \begin{enumerate}
+      \item 東西南北方向に対しての傾きを補正する(下図)。修正には回転行列を用いる。\\
+      $$
+      \begin{pmatrix}
+      X\\
+      Y
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+      \cos\theta & -\sin\theta \\
+      \sin\theta & \cos\theta
+      \end{pmatrix}
+      \begin{pmatrix}
+      x\\
+      y
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+      x\cos\theta - y\sin\theta \\
+      x\sin\theta + y\cos\theta
+      \end{pmatrix}
+      $$
+      \item 目標位置とのズレを補正する。こちらはズレの分だけ全ての座標をずらすだけである。
+    \end{enumerate}
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[keepaspectratio, scale=0.5]{Photo/image-8.png}
+        \caption{修正前}
+      \end{minipage}
+      \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[keepaspectratio, scale=0.5]{Photo/image-9.png}
+        \caption{修正後}
+      \end{minipage}
+    \end{figure}
+
+    \noindent
+    次に、壁の認識を行うのに必要な範囲のデータを切り取る。切り取る範囲はそれそれの方向の12cmである。
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=50mm]{Photo/image2.drawio.png}
+      \caption{}
+    \end{figure}
+    
+    切り取ったデータはそれぞれの方向を向いており扱いづらいので、機体前向きに回転させる。
+    \begin{figure}[H]
+      \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[keepaspectratio, scale=0.5]{Photo/画像1.png}
+        \caption{修正前}
+      \end{minipage}
+      \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[keepaspectratio, scale=0.5]{Photo/画像2.png}
+        \caption{修正後}
+      \end{minipage}
+    \end{figure}
+
+    \subsection{障害物の検知}
+
   \section{アピールポイント}
     \subsection{情報公開}
-    情報公開はロボカップジュニアの国是のようなものである。\\
-    シミュレーションリーグでコードをオープンにすることは、実機リーグのそれとは持つ意味合いが少し違うと思っている。良くも悪くも、たった1つのexeファイルが文字通り「全て」なのだから。だが、RCJJのコミュニティに何か少しでも貢献できることがあればと思い、今年もソースコードを大会終了後に公開することにした。\\
-    実際にこのソースコードを公開することで直接誰かの参考になるとはあまり思っていない。それよりも、自分を含めより多くの人が情報公開をすることで、よりコミュニティが活発になることに期待して公開を決めた。\\
-    また、公開することで、自分自身の成長を促すことにもなる。自分のコードを他人に見せることで、自分のコードに対する意識が変わる。\\
+    情報公開はロボカップジュニアの国是のようなもだ。\\
+    しかし、シミュレーションリーグでコードをオープンにすることは、実機リーグのそれとは持つ意味合いが少し違うと考える。良くも悪くも、たった1つのexeファイルが文字通り「全て」なのだから。だが、RCJJのコミュニティに何か少しでも貢献できることがあればと思い、今年もソースコードを大会終了後に公開することにした。\\
+    実際にこのソースコードを公開することで直接誰かの参考になるとはあまり思っていない。それよりも、自分を含めより多くの人が情報公開をすることで、よりコミュニティが活発になることに期待している。\\
 
     去年のリポジトリも公開状態だが、ポスターに明記していなかったため、アクセスする方法が限られていた。今年はポスターに載せているのでそのようなことにはならないはずである。\\
     
