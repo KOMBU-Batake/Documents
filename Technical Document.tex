@@ -60,48 +60,72 @@
     プログラム関連は無知\\
     フィールド作成、ポスターのデザイン提案、修正を行った。
   
-  \vskip\baselineskip
-  ---以下予想される内容---
+  \section{ロボットの構成}
+    \subsection{ロボットの写真}
+    \includegraphics[width=150mm]{Photo/robot.png}
 
-  \section{ロボットの構造など全般の説明}
+    \subsection{ロボット全般の説明}
+    タイヤ・モータの数はそれぞれ2つ。Robot Customizationの標準設定をそのまま使っている。
+
     \subsection{使用しているセンサーと使用目的}
-    \includegraphics[width=70mm]{Photo/8107.PNG}
-      
     \begin{itemize}
-      \item 左右モータ+エンコーダ\\標準のものをそのまま使用している。
-      \item IMU\\角度を取得するために使用している。
-      \item GPS\\位置情報を取得するために使用している。
-      \item カラーセンサ\\床の色情報を取得するために使用している。床との距離を近づけすぎないことで、チェックポイントタイルと通常タイルの判別をしやすくしている。
-      \item 距離センサ\\くっついているだけの飾りである。いつか取ろうと思っていつまでたっても取っていない。
-      \item LiDAR\\障害物の検知、壁の認識に使用している。
-      \item 左右カメラ\\被災者の検知に使用している。
+      \item 左右モータ + エンコーダ\\
+      標準のものをそのまま使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード.png}
+      \item IMU\\
+      角度を取得するために使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード1.png}
+      \item GPS\\
+      位置情報を取得するために使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード2.png}
+      \item LiDAR\\
+      障害物の検知、壁の認識に使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード3.png}
+      \item 左右カメラ\\
+      被災者の検知に使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード4.png}
+      \item 正面カメラ\\
+      障害物を発見と床の色の認識に使用している。\\
+      \includegraphics[width=40mm]{Photo/Parts/ダウンロード5.png}
     \end{itemize}
   
-
-  \section{使用しているプログラミング言語・ソフトウェア}
-  \noindent
-  主な開発環境
-  \begin{itemize}
-    \item Webots 2023.a
-    \item Erebus v23.0.5
-    \item C++ 14 (メイン言語)
-    \item Python 3.12.1
-    \item Visual Studio 2022
-  \end{itemize}
-
-  使用した言語はC++である。殊レスキューシミュレーションにおいてはPythonの方がポピュラーであることは何となしに知っていたが、C++の方が好みなのでC++を採用した。\\
-  もちろん、画像認識の選択肢が狭まることは承知の上である。\\
-
-  Visual Studioの環境構築には苦労した。なにせ、レスキューシミュレーション公式サイトにもDiscordにも情報がないのである。結果的には、Webotsの公式サイトの情報を基に作成した。このままではよくないと思い、簡単にだが環境構築方法をまとめたページを作成した。\url{https://qiita.com/kikou0517/items/f13045b6b97767e7d0f0}\\
+    \subsection{被災者の探索}
+    \noindent
+    正面と左右に1つずつカメラを搭載している。
+    \vskip.5\baselineskip
+    \noindent
+    正面カメラ\\
+    斜め上から目の前のタイル1枚を俯瞰するように設置してる。\\
+    Fov(視野角)を標準の1radから1.5radに広げて使用している。
+    \vskip.5\baselineskip
+    \noindent
+    側面カメラ\\
+    被災者に対して水平な高さから、被災者がちょうど収まるくらいの位置に置いている。
   
-  \noindent
-  使用ライブラリ
-  \begin{itemize}
-    \item OpenCV 4.8.0
-  \end{itemize}
+  \section{ロボットのソフトウェア}
 
-  \section{被災者・ハザードマップ}
-  考えたくない泣
+    \subsection{使用しているプログラミング言語・ソフトウェア}
+    \noindent
+    主な開発環境
+    \begin{itemize}
+      \item Webots 2023.a
+      \item Erebus v23.0.5
+      \item C++ 14 (メイン言語)
+      \item Python 3.12.1
+      \item Visual Studio 2022
+    \end{itemize}
+
+    使用した言語はC++である。殊レスキューシミュレーションにおいてはPythonの方がポピュラーであることは何となしに知っていたが、C++の方が好みなのでC++を採用した。\\
+    もちろん、画像認識の選択肢が狭まることは承知の上である。\\
+
+    Visual Studioの環境構築には苦労した。なにせ、レスキューシミュレーション公式サイトにもDiscordにも情報がないのである。結果的には、Webotsの公式サイトの情報を基に作成した。このままではよくないと思い、簡単にだが環境構築方法をまとめたページを作成した。\href{https://qiita.com/kikou0517/items/f13045b6b97767e7d0f0}{リンク}\\
+    
+    ソースコードの管理にはGitHubを使用した。draw.ioで作成したポスターと合わせて管理している。\\
+    ブランチ戦略にはGitHub Flowを使用している。かつてはgit-flowを使用していたが、今回は小規模開発のためシンプルで細やかなリリースを重ねていける開発スタイルを選択した。\\
+    他にも、GitHubのProject機能を使ったタスク管理を行うこともできた。\\
+    \includegraphics[width=150mm]{Photo/1.png}
+
+    \subsection{迷路探索}
 
   \section{探索アルゴリズム}
   深さ優先探索を使用する。探索は6cm単位で行う。\\
