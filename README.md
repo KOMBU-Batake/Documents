@@ -4,9 +4,10 @@ Technical Document.pdf が本体
 
 内容は提出したものと全く同じ(はず)  
 ちょっと背伸びしてLaTexで書くよ。  
-運営にドキュメントを消されるまでに書ききるのが目標。
 
 エンジニアリングジャーナルは[ソースコードのリポジトリ](https://github.com/KOMBU-Batake/Kombu-Batake)のWikiが原本である。
+
+ここに書ききれていない内容はいずれQiitaに書く予定
 
 # 試合動画
 round1.mp4,round2.mp4,round3.mp4,round4.mp4が試合動画。  
